@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+pushd $DOTFILES
+for folder in $(ls stow) 
+do
+    echo "stow stow/$folder"
+    stow -t $HOME -d stow/$folder .
+done
+popd
