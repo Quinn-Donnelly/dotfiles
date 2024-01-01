@@ -1,5 +1,5 @@
 # Install
-The following steps will set up config for environment but not install the software. Will likely add ansible for that soon-ish if I like the outcome of my [ansible-testing](https://github.com/Quinn-Donnelly/ansible-testing)
+The following steps will set up config for environment but not install the software. Will likely add ansible for that soon-ish if I like the outcome of my [ansible-testing](https://github.com/Quinn-Donnelly/testing-ansible)
 
 1. Clone repo into a location
 2. set the DOTFILES env variable to that location, you can find mine configured in [`stow/zsh/.zsh_profile`](stow/zsh/.zsh_profile) *note for first time bootstrapping you will need to set manually*
