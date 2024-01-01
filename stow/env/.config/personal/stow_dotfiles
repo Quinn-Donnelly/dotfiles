@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+stow_dotfiles() {
+    git pull origin trunk
+    source $DOTFILES/install
+}
+
