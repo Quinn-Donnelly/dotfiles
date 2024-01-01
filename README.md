@@ -9,5 +9,5 @@ The following steps will set up config for environment but not install the softw
 If you would like to add a new config file to be managed just add a directory under [`stow/`](stow) with the config files in it.
 
 ## Background
-In [this script](stow/env/.config/env/personal/env) there is a function `change_background` this will work on Ubuntu but likely not other OS systems. If you'd like to add more backgrounds
+In [this script](stow/env/.config/personal/env) there is a function `change_background` this will work on Ubuntu but likely not other OS systems. If you'd like to add more backgrounds
 you can do so by dropping the file into [backgrounds](backgrounds) directory. If you want to add new background to your source control you will need to force add with `git add -f <name>` since backgrounds are ignored in [`.gitignore`](.gitignore)
