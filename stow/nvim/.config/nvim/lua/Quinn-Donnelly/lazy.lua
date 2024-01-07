@@ -32,5 +32,5 @@ require("lazy").setup({
     { 'mfussenegger/nvim-lint' },
     { 'mhartington/formatter.nvim' },
     { 'simrat39/rust-tools.nvim' },
-    { "folke/neodev.nvim", opts = {} }, -- fixes undefined global vim and nvim sig help
+    { "folke/neodev.nvim",                opts = {} }, -- fixes undefined global vim and nvim sig help
 })
