@@ -1,5 +1,6 @@
 export DOTFILES=$HOME/dotfiles
 export CONFIG_HOME=$HOME/.config
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 PERSONAL=$CONFIG_HOME/personal
 source $PERSONAL/env
