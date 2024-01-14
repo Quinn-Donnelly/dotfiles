@@ -12,5 +12,6 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
 
 addToPathFront $HOME/.local/bin/scripts
+addToPathFront $HOME/.local/bin
 
 bindkey -s ^f "tmux-sessionizer\n"
