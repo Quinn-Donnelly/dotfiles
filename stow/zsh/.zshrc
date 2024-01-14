@@ -121,6 +121,9 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+# github cli
+autoload -U compinit
+compinit -i
 
 alias vi="nvim"
 alias vim="nvim"
