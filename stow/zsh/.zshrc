@@ -128,3 +128,5 @@ compinit -i
 alias vi="nvim"
 alias vim="nvim"
 alias v="nvim"
+
+alias cat="batcat"
