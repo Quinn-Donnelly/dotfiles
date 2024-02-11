@@ -1,7 +1,7 @@
 return {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
-    lazy = true,
+    lazy = false,
     ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     -- event = {
@@ -15,6 +15,10 @@ return {
         "nvim-lua/plenary.nvim",
 
         -- see below for full list of optional dependencies 👇
+    },
+    keys = {
+        { "<leader>t", "<cmd>ObsidianToday<cr>", desc = "Open todays notes in obsidian" },
+        { "<leader>n", "<cmd>ObsidianNew<cr>", desc = "Open new note in obsidian" },
     },
     opts = {
         workspaces = {
@@ -35,12 +39,7 @@ return {
                 },
             },
             ui = {
-                checkboxes = {
-                    [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
-                    ["x"] = { char = "", hl_group = "ObsidianDone" },
-                    [">"] = { char = "", hl_group = "ObsidianRightArrow" },
-                    ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-                }
+                enable = false,
             },
             daily_notes = {
                 folder = "Calendar/Daily Notes"
@@ -58,6 +57,7 @@ return {
                 return title
             end,
         })
-        vim.opt_local.conceallevel = 1
+
+        vim.conceallevel = 1
     end
 }
