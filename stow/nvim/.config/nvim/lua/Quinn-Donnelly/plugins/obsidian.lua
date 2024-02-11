@@ -18,7 +18,7 @@ return {
     },
     keys = {
         { "<leader>t", "<cmd>ObsidianToday<cr>", desc = "Open todays notes in obsidian" },
-        { "<leader>n", "<cmd>ObsidianNew<cr>", desc = "Open new note in obsidian" },
+        { "<leader>n", "<cmd>ObsidianNew<cr>",   desc = "Open new note in obsidian" },
     },
     opts = {
         workspaces = {
@@ -55,6 +55,9 @@ return {
             note_id_func = function(title)
                 print("testing...")
                 return title
+            end,
+            note_frontmatter_func = function()
+                return {}
             end,
         })
 
