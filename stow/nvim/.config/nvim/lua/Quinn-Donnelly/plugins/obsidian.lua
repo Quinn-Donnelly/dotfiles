@@ -19,6 +19,7 @@ return {
     keys = {
         { "<leader>t", "<cmd>ObsidianToday<cr>", desc = "Open todays notes in obsidian" },
         { "<leader>n", "<cmd>ObsidianNew<cr>",   desc = "Open new note in obsidian" },
+        { "<leader>os", "<cmd>ObsidianSearch<cr>",   desc = "Searches for file in obsidian open, create, insert" },
     },
     opts = {
         workspaces = {
