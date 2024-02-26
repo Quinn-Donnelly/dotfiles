@@ -245,15 +245,19 @@ workspace 5 output DP-4
 workspace 9 output DP-3
 workspace 0 output HDMI-0
 
+# Spotify in the version i have installed sets the WM_CLASS after window mapping
+# for_window will react to changes on WM_CLASS thus will correct workspace post
+# spotify getting it's act together and stops violating spec
+for_window [class="Spotify"] move to workspace 1
 assign [class="firefox"] 3
-assign [class="kitty"] 4
-assign [class="spotify"] 1
 assign [class="discord"] 2
 assign [class="obsidian"] 5
 
-exec --no-startup-id firefox
-exec --no-startup-id kitty
-exec --no-startup-id spotify
-exec --no-startup-id obsidian 
-exec --no-startup-id discord
+exec firefox
+# have default terminal on common workspace but allow terminals on other
+# workspaces for spacers
+exec i3-msg 'workspace 4; exec kitty'
+exec spotify
+exec obsidian 
+exec discord
 
