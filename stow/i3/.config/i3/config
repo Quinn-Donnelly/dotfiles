@@ -260,4 +260,5 @@ exec i3-msg 'workspace 4; exec kitty'
 exec spotify
 exec obsidian 
 exec discord
+exec syncthing serve --no-browser --logfile=default
 
