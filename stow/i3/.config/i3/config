@@ -245,6 +245,11 @@ workspace 5 output DP-4
 workspace 9 output DP-3
 workspace 0 output HDMI-0
 
+# Layout config
+
+exec --no-startup-id "i3-msg 'workspace 3; append_layout /home/quinn/.config/i3/workspace3.json'"
+exec --no-startup-id "i3-msg 'workspace 5; append_layout /home/quinn/.config/i3/workspace5.json'"
+
 # Spotify in the version i have installed sets the WM_CLASS after window mapping
 # for_window will react to changes on WM_CLASS thus will correct workspace post
 # spotify getting it's act together and stops violating spec
@@ -256,6 +261,7 @@ assign [class="obsidian"] 5
 exec firefox
 # have default terminal on common workspace but allow terminals on other
 # workspaces for spacers
+exec kitty
 exec i3-msg 'workspace 4; exec kitty'
 exec spotify
 exec obsidian 
