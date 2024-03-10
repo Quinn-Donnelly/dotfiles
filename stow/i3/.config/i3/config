@@ -233,6 +233,11 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 # Suspend
 bindsym $mod+Shift+period exec systemctl suspend
+bindsym $mod+o exec --no-startup-id \
+  $HOME/.local/bin/scripts/sink-switch --speakers
+bindsym $mod+i exec --no-startup-id \
+  $HOME/.local/bin/scripts/sink-switch --headphones
+
 
 # Customization testing
 exec $HOME/.screenlayout/screenlayout.sh
