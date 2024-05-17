@@ -4,7 +4,7 @@ increaseWatchers() {
 }
 
 change_background() {
-    gsettings set org.gnome.desktop.background picture-uri-dark "'$DOTFILES/backgrounds/$(ls ~/dotfiles/backgrounds | fzf)'"
+    feh --bg-scale "$DOTFILES/backgrounds/$(ls ~/dotfiles/backgrounds | fzf)"
 }
 
 
