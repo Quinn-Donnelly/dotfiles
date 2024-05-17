@@ -272,4 +272,4 @@ exec spotify
 exec obsidian 
 exec discord
 exec syncthing serve --no-browser --logfile=default
-
+exec xrandr --output DP-4 -r 165.00 --mode 3840x2160
