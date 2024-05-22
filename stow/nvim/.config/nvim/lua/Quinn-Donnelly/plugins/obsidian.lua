@@ -17,9 +17,9 @@ return {
         -- see below for full list of optional dependencies 👇
     },
     keys = {
-        { "<leader>t", "<cmd>ObsidianToday<cr>", desc = "Open todays notes in obsidian" },
-        { "<leader>n", "<cmd>ObsidianNew<cr>",   desc = "Open new note in obsidian" },
-        { "<leader>os", "<cmd>ObsidianSearch<cr>",   desc = "Searches for file in obsidian open, create, insert" },
+        { "<leader>t",  "<cmd>ObsidianToday<cr>",  desc = "Open todays notes in obsidian" },
+        { "<leader>n",  "<cmd>ObsidianNew<cr>",    desc = "Open new note in obsidian" },
+        { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Searches for file in obsidian open, create, insert" },
     },
     opts = {
         workspaces = {
@@ -45,13 +45,12 @@ return {
             daily_notes = {
                 folder = "Calendar/Daily Notes"
             },
-            notes_subdir = "_Add",
+            -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
             completion = {
-                new_notes_location = "notes_subdir",
-                prepend_note_id = false,
-                prepend_note_path = false,
-                use_path_only = true,
+                -- Set to false to disable completion.
+                nvim_cmp = true,
             },
+            notes_subdir = "_Add",
             -- Optional, customize how names/IDs for new notes are created.
             note_id_func = function(title)
                 print("testing...")

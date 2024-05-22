@@ -5,6 +5,7 @@ return {
         "rcarriga/nvim-dap-ui",
         "leoluz/nvim-dap-go",
         "folke/neodev.nvim",
+        "nvim-neotest/nvim-nio",
     },
     config = function()
         require("dapui").setup()
