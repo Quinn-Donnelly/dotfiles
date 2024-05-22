@@ -81,6 +81,22 @@ return {
                     }
                 }
             end,
+            ["yaml"] = function()
+                local lspconfig = require("lspconfig")
+                lspconfig.yamlls.setup {
+                    settings = {
+                        yaml = {
+                            schemaStore = {
+                                enable = true
+                            },
+                            customTags = {
+                                "!Ref",
+                                "!ImportValue",
+                            },
+                        },
+                    },
+                }
+            end
         }
 
         -- Mapping lsp keybindings when lsp is attached

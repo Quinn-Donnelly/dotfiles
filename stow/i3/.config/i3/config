@@ -274,4 +274,4 @@ exec discord
 exec syncthing serve --no-browser --logfile=default
 exec xrandr --output DP-4 -r 165.00 --mode 3840x2160
 exec feh --bg-scale $HOME/Pictures/default
-exec --no-startup-id "compton"
+exec --no-startup-id "compton --config ~/.config/compton.config"
