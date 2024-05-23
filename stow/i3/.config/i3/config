@@ -222,8 +222,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 #
 # # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Alsa audio controls.
 #bindsym $mod+Shift+comma exec ~/.config/i3/scripts/alsa restore
@@ -272,6 +272,12 @@ exec spotify
 exec obsidian 
 exec discord
 exec syncthing serve --no-browser --logfile=default
-exec xrandr --output DP-4 -r 165.00 --mode 3840x2160
 exec feh --bg-scale $HOME/Pictures/default
 exec --no-startup-id "compton --config ~/.config/compton.config"
+# conditionally do this based on host
+# Will need to call out to a script with i3-msg to then check against xrandr output
+# exec xrandr --output DP-4 -r 165.00 --mode 3840x2160
+
+# screen brightness hotkeys
+bindsym XF86MonBrightnessUp exec brightnessctl set +2%
+bindsym XF86MonBrightnessDown exec brightnessctl set 2%-
