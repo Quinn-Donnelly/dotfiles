@@ -113,7 +113,6 @@ return {
                 "rust_analyzer",
                 "gopls",
                 "gradle_ls",
-                "groovyls",
                 "dockerls",
                 "bashls",
                 "angularls",
