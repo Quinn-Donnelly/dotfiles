@@ -271,7 +271,6 @@ exec i3-msg 'workspace 4; exec kitty'
 exec spotify
 exec obsidian 
 exec discord
-exec syncthing serve --no-browser --logfile=default
 exec feh --bg-scale $HOME/Pictures/default
 exec --no-startup-id "compton --config ~/.config/compton.config"
 # conditionally do this based on host
