@@ -10,6 +10,9 @@ return {
         { "<C-p>",      "<cmd>Telescope git_files<cr>",  desc = "find files checked into git" },
         { "<leader>ps", "<cmd>Telescope live_grep<cr>",  desc = "grep for pattern" },
         { "<leader>ph", "<cmd>Telescope help_tags<cr>",  desc = "search help" },
+        { "<leader>pm", "<cmd>Telescope man_pages<cr>",  desc = "search man pages" },
+        { "<leader>pk", "<cmd>Telescope keymaps<cr>",    desc = "search through keymaps" },
+        { "<leader>py", "<cmd>Telescope planets<cr>",    desc = "For the memes one must have a telescope" },
     },
 
     config = function()
