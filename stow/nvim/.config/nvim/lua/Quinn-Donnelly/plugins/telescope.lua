@@ -14,7 +14,6 @@ return {
         { "<leader>pk", "<cmd>Telescope keymaps<cr>",    desc = "search through keymaps" },
         { "<leader>py", "<cmd>Telescope planets<cr>",    desc = "For the memes one must have a telescope" },
     },
-
     config = function()
         require("telescope").setup {
             pickers = {

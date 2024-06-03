@@ -17,8 +17,8 @@ return {
         -- see below for full list of optional dependencies 👇
     },
     keys = {
-        { "<leader>t",  "<cmd>ObsidianToday<cr>",  desc = "Open todays notes in obsidian" },
-        { "<leader>n",  "<cmd>ObsidianNew<cr>",    desc = "Open new note in obsidian" },
+        { "<leader>ot",  "<cmd>ObsidianToday<cr>",  desc = "Open todays notes in obsidian" },
+        { "<leader>on",  "<cmd>ObsidianNew<cr>",    desc = "Open new note in obsidian" },
         { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Searches for file in obsidian open, create, insert" },
     },
     opts = {
