@@ -299,3 +299,4 @@ exec --no-startup-id "compton --config ~/.config/compton.config"
 # screen brightness hotkeys
 bindsym XF86MonBrightnessUp exec brightnessctl set +2%
 bindsym XF86MonBrightnessDown exec brightnessctl set 2%-
+
