@@ -50,6 +50,7 @@ return {
                 -- Set to false to disable completion.
                 nvim_cmp = true,
             },
+            disable_frontmatter = true,
             notes_subdir = "_Add",
             -- Optional, customize how names/IDs for new notes are created.
             note_id_func = function(title)

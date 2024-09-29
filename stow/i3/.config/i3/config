@@ -281,6 +281,7 @@ for_window [class="Spotify"] move to workspace 1
 assign [class="firefox"] 3
 assign [class="discord"] 2
 assign [class="obsidian"] 5
+for_window [class="anki"] move to workspace 5
 
 exec firefox
 # have default terminal on common workspace but allow terminals on other
@@ -290,11 +291,12 @@ exec i3-msg 'workspace 4; exec kitty'
 exec spotify
 exec obsidian 
 exec discord
+exec i3-msg 'workspace 5; exec anki'
 exec feh --bg-scale $HOME/Pictures/default
 exec --no-startup-id "compton --config ~/.config/compton.config"
 # conditionally do this based on host
 # Will need to call out to a script with i3-msg to then check against xrandr output
-# exec xrandr --output DP-4 -r 165.00 --mode 3840x2160
+exec xrandr --output DP-4 -r 165.00 --mode 3840x2160
 
 # screen brightness hotkeys
 bindsym XF86MonBrightnessUp exec brightnessctl set +2%
