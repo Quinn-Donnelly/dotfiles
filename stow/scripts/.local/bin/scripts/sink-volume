@@ -1,0 +1,28 @@
+#!/bin/bash
+arg="${1:-}"
+index=$(pacmd list-sinks | grep '* index:' | grep -Po '([0-9])')
+increment=""
+message=""
+
+case "$arg" in
+  --increase)
+    increment="+5%"
+    message="increased volume"
+    ;;
+  --decrease)
+    increment="-5%"
+    message="decreased volume"
+
+    ;;
+  *)
+    # Setting this as the default lets polybar call the script and display
+    # an icon of some sort on the icon bar. The character I used isn't
+    # showing up right on this non-linux machine I'm using, so replace "X"
+    # with whatever character or symbol you want on your polybar.
+    echo "X"
+    ;;
+esac
+
+pactl set-sink-volume $index $increment
+notify-send $message
+
