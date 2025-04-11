@@ -19,7 +19,7 @@
             "percent": 0.5,
             "swallows": [
                 {
-                    "class": "^firefox$"
+                    "class": "^firefox_firefox$"
                 }
             ],
             "type": "con"
@@ -48,7 +48,7 @@
                     "percent": 1,
                     "swallows": [
                         {
-                            "class": "^firefox$"
+                            "class": "^firefox_firefox$"
                         }
                     ],
                     "type": "con"

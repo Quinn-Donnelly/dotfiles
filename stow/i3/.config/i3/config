@@ -283,7 +283,7 @@ exec --no-startup-id "i3-msg 'workspace 5; append_layout /home/quinn/.config/i3/
 # for_window will react to changes on WM_CLASS thus will correct workspace post
 # spotify getting it's act together and stops violating spec
 for_window [class="Spotify"] move to workspace 1
-assign [class="firefox"] 3
+assign [class="firefox_firefox"] 3
 assign [class="discord"] 2
 assign [class="obsidian"] 5
 for_window [class="anki"] move to workspace 5

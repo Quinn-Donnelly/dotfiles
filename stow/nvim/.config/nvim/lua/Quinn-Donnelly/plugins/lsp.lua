@@ -120,7 +120,6 @@ return {
                 "eslint",
                 "html",
                 "jsonls",
-                "tsserver",
                 "marksman",
                 "pyright",
                 "terraformls",
