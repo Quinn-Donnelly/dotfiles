@@ -1,6 +1,6 @@
 #!/bin/bash
 arg="${1:-}"
-index=$(pacmd list-sinks | grep '* index:' | grep -Po '([0-9])')
+index=$(pacmd list-sinks | grep '* index:' | grep -Po '\d+')
 increment=""
 message=""
 
