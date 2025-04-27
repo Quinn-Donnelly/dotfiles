@@ -52,3 +52,5 @@
 	rebase = true
 [rebase]
 	updateRefs = true
+[maintenance]
+	repo = /storage/quinn/documents/projects/vault
