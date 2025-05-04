@@ -45,7 +45,10 @@
 
 [merge]
     conflictstyle = diff3
-
+    tool = nvimdiff4
+	prompt = false
+[mergetool "nvimdiff4"]
+	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [diff]
     colorMoved = default 
 [pull]
@@ -54,3 +57,5 @@
 	updateRefs = true
 [maintenance]
 	repo = /storage/quinn/documents/projects/vault
+[grep]
+    patternType = perl
