@@ -17,6 +17,7 @@ return {
           ["<C-l>"] = false,
           ["<C-k>"] = false,
           ["<C-j>"] = false,
+          ["<C-p>"] = false,
           ["<M-h>"] = "actions.select_split",
         },
         win_options = {
