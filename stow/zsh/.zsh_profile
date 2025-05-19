@@ -10,6 +10,7 @@ done
 
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
+source $DOTFILES/.env
 
 addToPathFront $HOME/.local/bin/scripts
 addToPathFront $HOME/.local/bin
