@@ -261,6 +261,10 @@ bindsym $mod+o exec --no-startup-id \
   $HOME/.local/bin/scripts/sink-switch --speakers
 bindsym $mod+i exec --no-startup-id \
   $HOME/.local/bin/scripts/sink-switch --headphones
+bindsym $mod+p exec --no-startup-id \
+  $HOME/.local/bin/scripts/sink-switch --bluetooth
+
+
 
 
 # Customization testing
