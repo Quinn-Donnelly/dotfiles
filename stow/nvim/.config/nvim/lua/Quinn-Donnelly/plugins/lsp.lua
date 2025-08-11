@@ -106,6 +106,18 @@ return {
             end,
         })
 
+        -- Setup GoDot
+        local lspconfig = require('lspconfig')
+        lspconfig.gdscript.setup(capabilities)
+        vim.lsp.start({
+            name = 'Godot',
+            cmd = cmd,
+            root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
+            on_attach = function(client, bufnr)
+                vim.api.nvim_command('echo serverstart("' .. pipe .. '")')
+            end
+        })
+
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
