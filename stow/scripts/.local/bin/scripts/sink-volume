@@ -1,16 +1,15 @@
 #!/bin/bash
 arg="${1:-}"
-index=$(pacmd list-sinks | grep '* index:' | grep -Po '\d+')
 increment=""
 message=""
 
 case "$arg" in
   --increase)
-    increment="+5%"
+    increment="5%+"
     message="increased volume"
     ;;
   --decrease)
-    increment="-5%"
+    increment="5%-"
     message="decreased volume"
 
     ;;
@@ -23,6 +22,6 @@ case "$arg" in
     ;;
 esac
 
-pactl set-sink-volume $index $increment
+wpctl set-volume @DEFAULT_AUDIO_SINK@ $increment
 notify-send $message
 
