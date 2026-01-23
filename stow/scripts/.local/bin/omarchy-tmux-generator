@@ -1,0 +1,247 @@
+#!/bin/bash
+# Omarchy Tmux Theme Generator (v2.1.0)
+# Generates and maintains persistent theme profiles
+set -euo pipefail
+
+readonly OMARCHY_DIR="$HOME/.config/omarchy"
+readonly THEME_NAME_FILE="$OMARCHY_DIR/current/theme.name"
+readonly PERSISTENT_THEMES_DIR="$HOME/.config/tmux/omarchy-themes"
+readonly CURRENT_THEME_LINK="$HOME/.config/tmux/omarchy-current-theme.conf"
+
+detect_theme() {
+  local theme_name=""
+  
+  # Try reading from theme.name file
+  if [[ -f "$THEME_NAME_FILE" ]]; then
+    theme_name=$(cat "$THEME_NAME_FILE" | tr -d '[:space:]' 2>/dev/null || echo "")
+  fi
+  
+  # Fallback to default
+  echo "${theme_name:-tokyo-night}"
+}
+
+map_theme() {
+  local theme="$1"
+  local base="tokyo-night"
+  local variant="night"
+  
+  case "$theme" in
+    # Catppuccin variants
+    catppuccin-latte)
+      base="catppuccin"; variant="latte" ;;
+    catppuccin|catppuccin-macchiato)
+      base="catppuccin"; variant="macchiato" ;;
+    catppuccin-frappe)
+      base="catppuccin"; variant="frappe" ;;
+    catppuccin-mocha)
+      base="catppuccin"; variant="mocha" ;;
+    
+    # Rose Pine variants
+    rose-pine|rose-pine-dawn)
+      base="rose-pine"; variant="dawn" ;;
+    rose-pine-main)
+      base="rose-pine"; variant="main" ;;
+    rose-pine-moon)
+      base="rose-pine"; variant="moon" ;;
+    
+    # Tokyo Night variants
+    tokyo-night|tokyo-night-night)
+      base="tokyo-night"; variant="night" ;;
+    tokyo-night-storm)
+      base="tokyo-night"; variant="storm" ;;
+    tokyo-night-day)
+      base="tokyo-night"; variant="day" ;;
+    
+    # Everforest variants
+    everforest|everforest-dark)
+      base="everforest"; variant="dark" ;;
+    everforest-light)
+      base="everforest"; variant="light" ;;
+    
+    # Gruvbox variants
+    gruvbox|gruvbox-dark)
+      base="gruvbox"; variant="dark" ;;
+    gruvbox-light)
+      base="gruvbox"; variant="light" ;;
+    
+    # Kanagawa variants
+    kanagawa|kanagawa-dragon)
+      base="kanagawa"; variant="dragon" ;;
+    kanagawa-lotus)
+      base="kanagawa"; variant="lotus" ;;
+    
+    # Flexoki variants
+    flexoki|flexoki-light)
+      base="flexoki"; variant="light" ;;
+    flexoki-dark)
+      base="flexoki"; variant="dark" ;;
+    
+    # Nord
+    nord)
+      base="nord"; variant="dark" ;;
+    
+    # Dracula
+    dracula|dracula-dark)
+      base="dracula"; variant="dark" ;;
+    
+    # Solarized variants
+    solarized|solarized-dark)
+      base="solarized"; variant="dark" ;;
+    solarized-light)
+      base="solarized"; variant="light" ;;
+    
+    # GitHub variants
+    github|github-dark)
+      base="github"; variant="dark" ;;
+    github-light)
+      base="github"; variant="light" ;;
+    
+    # Ayu variants
+    ayu|ayu-dark)
+      base="ayu"; variant="dark" ;;
+    ayu-light)
+      base="ayu"; variant="light" ;;
+    ayu-mirage)
+      base="ayu"; variant="mirage" ;;
+    
+     # Material variants
+     material|material-default)
+       base="material"; variant="default" ;;
+     material-ocean)
+       base="material"; variant="ocean" ;;
+     material-palenight)
+       base="material"; variant="palenight" ;;
+     material-lighter)
+       base="material"; variant="lighter" ;;
+
+     # Cobalt2
+     cobalt2|cobalt2-default)
+       base="cobalt2"; variant="default" ;;
+
+     # Darcula
+     darcula)
+       base="darcula"; variant="default" ;;
+
+     # Horizon
+     horizon|horizon-default)
+       base="horizon"; variant="default" ;;
+
+     # Kiribyte
+     kiribyte|kiribyte-dark)
+       base="kiribyte"; variant="dark" ;;
+     kiribyte-light)
+       base="kiribyte"; variant="light" ;;
+
+     # Molokai
+     molokai|molokai-dark)
+       base="molokai"; variant="dark" ;;
+
+     # Moonlight
+     moonlight|moonlight-default)
+       base="moonlight"; variant="default" ;;
+
+     # Poimandres
+     poimandres|poimandres-default)
+       base="poimandres"; variant="default" ;;
+
+     # Slack
+     slack|slack-dark)
+       base="slack"; variant="dark" ;;
+
+     # Snazzy
+     snazzy|snazzy-default)
+       base="snazzy"; variant="default" ;;
+
+     # Spacegray
+     spacegray|spacegray-dark)
+       base="spacegray"; variant="dark" ;;
+
+     # Vesper
+     vesper|vesper-default)
+       base="vesper"; variant="default" ;;
+
+     # Other themes with generic handling
+     monokai*|onedark*|atom*|iceberg*|night-owl*|oceanic-next*|pastel*|synthwave*)
+       base=$(echo "$theme" | cut -d'-' -f1)
+       variant=$(echo "$theme" | cut -s -d'-' -f2-)
+       variant=${variant:-dark}
+       ;;
+
+     # Ethereal
+     ethereal)
+       base="ethereal"; variant="default" ;;
+     # Osaka Jade
+     osaka-jade)
+       base="osaka-jade"; variant="default" ;;
+     # Hackerman
+     hackerman)
+       base="hackerman"; variant="default" ;;
+     # Matte Black
+     matte-black)
+       base="matte-black"; variant="default" ;;
+    # Ristretto
+     ristretto)
+       base="ristretto"; variant="default" ;;
+
+     # Unsupported themes (fallback)
+     *)
+       base="tokyo-night"; variant="night" ;;
+   esac
+  
+  echo "$base|$variant"
+}
+
+# Main execution
+theme_name=$(detect_theme)
+theme_file="$PERSISTENT_THEMES_DIR/$theme_name.conf"
+
+# Create persistent theme file ONLY if it doesn't exist
+if [[ ! -f "$theme_file" ]]; then
+  IFS='|' read -r base variant <<<"$(map_theme "$theme_name")"
+  
+  cat >"$theme_file" <<EOF
+# ============================================================================
+# Omarchy Tmux Theme: $theme_name
+# PowerKit Theme: $base${variant:+ ($variant)}
+# ============================================================================
+# 
+# PERSISTENT THEME PROFILE
+# This file is yours to customize! Your changes will persist across theme
+# switches - when you return to this theme, your customizations remain.
+#
+# ============================================================================
+
+# PowerKit Plugin
+set -g @plugin 'fabioluciano/tmux-powerkit'
+
+# Theme Configuration
+set -g @powerkit_theme '$base'
+EOF
+  
+  if [[ -n "$variant" ]]; then
+    echo "set -g @powerkit_theme_variant '$variant'" >>"$theme_file"
+  fi
+  
+  cat >>"$theme_file" <<'EOF'
+
+# Plugins (customize as needed)
+set -g @powerkit_plugins "datetime,battery,cpu,memory,hostname"
+
+# Visual Options
+set -g @powerkit_separator_style "normal"
+
+# Performance
+set -g @powerkit_status_interval "5"
+
+# PowerKit keybindings
+set -g @powerkit_theme_selector_key "T"
+set -g @powerkit_reload_config_key "R"
+
+# ============================================================================
+EOF
+fi
+
+# Update symlink to point to current theme's persistent profile
+ln -sf "$theme_file" "$CURRENT_THEME_LINK"
+
+exit 0

@@ -1,0 +1,20 @@
+#!/bin/bash
+# Omarchy Tmux Reload Script (v2.1.0)
+# Called by Omarchy when theme changes
+set -euo pipefail
+
+readonly GENERATOR="$HOME/.local/bin/omarchy-tmux-generator"
+readonly TMUX_CONF="$HOME/.config/tmux/tmux.conf"
+
+# Regenerate current theme config
+if [[ -x "$GENERATOR" ]]; then
+  "$GENERATOR" &>/dev/null || true
+fi
+
+# Reload tmux if running
+if tmux list-sessions &>/dev/null 2>&1; then
+  tmux source-file "$TMUX_CONF" &>/dev/null || true
+  tmux refresh-client -S &>/dev/null || true
+fi
+
+exit 0
