@@ -4,8 +4,11 @@
     "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.editor.harpoon2",
     "lazyvim.plugins.extras.editor.neo-tree",
+    "lazyvim.plugins.extras.lang.clangd",
+    "lazyvim.plugins.extras.lang.git",
     "lazyvim.plugins.extras.lang.go",
     "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.test.core"
   ],
   "install_version": 8,
