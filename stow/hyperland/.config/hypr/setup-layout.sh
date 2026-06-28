@@ -15,21 +15,21 @@ sleep 5
 
 hyprctl dispatch workspace 2
 hyprctl dispatch layoutmsg togglesplit
-hyprctl dispatch splitratio -0.2
+hyprctl dispatch layoutmsg splitratio -0.2
 hyprctl dispatch movefocus d
 
 hyprctl dispatch workspace 3
 hyprctl dispatch layoutmsg togglesplit
-hyprctl dispatch splitratio -0.2
+hyprctl dispatch layoutmsg splitratio -0.2
 hyprctl dispatch movefocus d
 
 hyprctl dispatch workspace 4 
 hyprctl dispatch layoutmsg togglesplit
-hyprctl dispatch splitratio -0.2
+hyprctl dispatch layoutmsg splitratio -0.2
 hyprctl dispatch movefocus d
 
 hyprctl dispatch workspace 5
 hyprctl dispatch layoutmsg togglesplit
-hyprctl dispatch splitratio -0.2
+hyprctl dispatch layoutmsg splitratio -0.2
 hyprctl dispatch swapwindow d
 hyprctl dispatch movefocus d
