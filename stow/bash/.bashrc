@@ -11,19 +11,25 @@ source ~/.local/share/omarchy/default/bash/rc
 # alias p='python'
 # Add this to your ~/.bashrc
 
-# Path to your script (full path)
-MY_SCRIPT="$HOME/.local/bin/scripts/tmux-sessionizer"
-
-# Function to run your script
-run_my_script() {
-    # Clear the current line before running the script
+# Bind Ctrl-F for sesh (project/tmux session switcher)
+sesh_connect() {
     READLINE_LINE=""
     READLINE_POINT=0
-    "$MY_SCRIPT"
+    sesh connect "$(
+      sesh list --icons | fzf --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+        --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+        --bind 'tab:down,btab:up' \
+        --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+        --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+        --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+        --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+        --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+        --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+        --preview-window 'right:55%' \
+        --preview 'sesh preview {}'
+    )"
 }
-
-# Bind Ctrl-F to run your function
-bind -x '"\C-f":run_my_script'
+bind -x '"\C-f":sesh_connect'
 PATH="$PATH:$HOME/.local/bin/scripts"
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init bash)"; fi
