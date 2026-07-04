@@ -25,3 +25,5 @@ run_my_script() {
 # Bind Ctrl-F to run your function
 bind -x '"\C-f":run_my_script'
 PATH="$PATH:$HOME/.local/bin/scripts"
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init bash)"; fi
