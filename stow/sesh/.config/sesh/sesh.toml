@@ -1,0 +1,20 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+[[window]]
+name = "shell"
+
+[[window]]
+name = "hunk"
+startup_script = "hunk diff --watch"
+
+[[window]]
+name = "nvim"
+startup_script = "nvim"
+
+[[window]]
+name = "opencode"
+startup_script = "opencode"
+
+[[wildcard]]
+pattern = "~/Documents/projects/**"
+startup_command = "~/.local/bin/scripts/sesh-project-startup {}"

@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Creates project windows after sesh creates the session
+# Workaround for sesh bug where wildcard windows are created in
+# the current session instead of the target session (PR #395)
+# https://github.com/joshmedeski/sesh/pull/395
+
+project_dir="$1"
+
+# Change to project directory
+cd "$project_dir" || exit 1
+
+# Create windows in the correct session
+# shell window (window 2)
+tmux new-window -n shell
+# hunk window (window 3)
+tmux new-window -d -n hunk
+tmux send-keys -t hunk "hunk diff --watch" Enter
+# nvim window (window 4)
+tmux new-window -d -n nvim
+tmux send-keys -t nvim "nvim" Enter
+# opencode window (window 5)
+tmux new-window -d -n opencode
+tmux send-keys -t opencode "opencode" Enter
+
+# Switch back to default window (window 1) and open project note
+tmux select-window -t 1
+
+# Check for PROJECT_NOTE_LOCATION in .env or environment
+[[ -f "$project_dir/.env" ]] && source "$project_dir/.env"
+if [[ -n "$PROJECT_NOTE_LOCATION" ]]; then
+  nvim "$PROJECT_NOTE_LOCATION"
+else
+  repo_name=$(basename -s .git "$(git -C "$project_dir" remote get-url origin 2>/dev/null)" 2>/dev/null)
+  [[ -z "$repo_name" ]] && repo_name=$(basename "$project_dir")
+  nvim -c "lua vim.schedule(function() vim.cmd('ObsidianSearch') end)"
+fi
