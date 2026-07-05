@@ -1,0 +1,15 @@
+#!/bin/bash
+# Reload tmux config and re-source shell configs
+set -euo pipefail
+
+readonly TMUX_CONF="$HOME/.config/tmux/tmux.conf"
+
+# Reload tmux configuration
+tmux source-file "$TMUX_CONF"
+
+# Re-source bashrc in the current pane if at a shell prompt (skip if running vim, etc.)
+pane_cmd=$(tmux display-message -p '#{pane_current_command}')
+case "$pane_cmd" in
+    bash|zsh|fish|sh|dash|ksh)
+        tmux send-keys "source ~/.bashrc" Enter ;;
+esac
