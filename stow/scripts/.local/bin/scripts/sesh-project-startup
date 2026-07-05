@@ -28,9 +28,9 @@ tmux select-window -t 1
 # Check for PROJECT_NOTE_LOCATION in .env or environment
 [[ -f "$project_dir/.env" ]] && source "$project_dir/.env"
 if [[ -n "$PROJECT_NOTE_LOCATION" ]]; then
-  nvim "$PROJECT_NOTE_LOCATION"
+  nvim -c "NoNeckPain" "$PROJECT_NOTE_LOCATION"
 else
   repo_name=$(basename -s .git "$(git -C "$project_dir" remote get-url origin 2>/dev/null)" 2>/dev/null)
   [[ -z "$repo_name" ]] && repo_name=$(basename "$project_dir")
-  nvim -c "lua vim.schedule(function() vim.cmd('ObsidianSearch') end)"
+  nvim -c "lua vim.schedule(function() vim.cmd('ObsidianSearch'); vim.cmd('NoNeckPain'); vim.cmd('PencilHard') end)"
 fi
