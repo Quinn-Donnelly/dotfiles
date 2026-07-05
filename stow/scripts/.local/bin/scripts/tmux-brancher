@@ -7,9 +7,6 @@ if [[ "${1:-}" == "--popup" ]]; then
     FZF_CMD="fzf-tmux -p 80%,70%"
 fi
 
-branch_name=$(echo "" | $FZF_CMD --print-query --prompt="Branch name> " | tail -1) || true
-[ -z "$branch_name" ] && exit 1
-
 project_root=$(git rev-parse --show-toplevel 2>/dev/null) || {
     is_bare=$(git rev-parse --is-bare-repository 2>/dev/null)
     [[ "$is_bare" != "true" ]] && exit 1
@@ -20,14 +17,41 @@ cd "$project_root"
 
 is_bare=$(git rev-parse --is-bare-repository 2>/dev/null)
 
+# Build existing items list for fzf
 if [[ "$is_bare" == "true" ]] || { [[ -f .git ]] && grep -q 'bare = true' "$(git rev-parse --git-common-dir)/config" 2>/dev/null; }; then
-    wt switch --create "$branch_name"
-    worktree_path=$(git worktree list | awk -v b="$branch_name" '$3 == "["b"]" {print $1}')
+    existing=$(git worktree list | awk '$3 ~ /^\[/ {gsub(/[\[\]]/, "", $3); print $3, $1}')
+else
+    existing=$(git branch --list --format='%(refname:short)')
+fi
+
+# Prompt with existing items as fuzzy-findable choices
+result=$(echo "$existing" | $FZF_CMD --print-query --prompt="Branch name> ") || true
+[ -z "$result" ] && exit 1
+
+query=$(echo "$result" | head -1)
+selected=$(echo "$result" | tail -1)
+selected_branch=$(echo "$selected" | awk '{print $1}')
+
+# Check if user selected a pre-existing branch/worktree
+is_existing=$(echo "$existing" | awk -v b="$selected_branch" '$1 == b {print "true"; exit}')
+[ -z "$is_existing" ] && is_existing="false"
+
+if [[ "$is_bare" == "true" ]] || { [[ -f .git ]] && grep -q 'bare = true' "$(git rev-parse --git-common-dir)/config" 2>/dev/null; }; then
+    if [[ "$is_existing" == "true" ]]; then
+        wt switch "$selected_branch"
+    else
+        wt switch --create "$selected_branch"
+    fi
+    worktree_path=$(git worktree list | awk -v b="$selected_branch" '$3 == "["b"]" {print $1}')
     sesh connect "$worktree_path"
 else
-    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@.*/@@')
-    [ -z "$default_branch" ] && default_branch=$(git remote show origin 2>/dev/null | grep 'HEAD branch' | awk '{print $NF}')
-    [ -z "$default_branch" ] && default_branch="main"
-    git fetch origin "$default_branch"
-    git checkout -b "$branch_name" "origin/$default_branch"
+    if [[ "$is_existing" == "true" ]]; then
+        git checkout "$selected_branch"
+    else
+        default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@.*/@@')
+        [ -z "$default_branch" ] && default_branch=$(git remote show origin 2>/dev/null | grep 'HEAD branch' | awk '{print $NF}')
+        [ -z "$default_branch" ] && default_branch="main"
+        git fetch origin "$default_branch"
+        git checkout -b "$selected_branch" "origin/$default_branch"
+    fi
 fi
