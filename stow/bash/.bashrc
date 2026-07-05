@@ -19,6 +19,14 @@ sesh_connect() {
 }
 bind -x '"\C-f":sesh_connect'
 
+# Bind Ctrl-B to create a new branch (tmux-brancher)
+sesh_branch() {
+    READLINE_LINE=""
+    READLINE_POINT=0
+    tmux-brancher
+}
+bind -x '"\C-b":sesh_branch'
+
 # Reload configs (tmux + bash) on Ctrl-R
 reload_config() {
     READLINE_LINE=""
