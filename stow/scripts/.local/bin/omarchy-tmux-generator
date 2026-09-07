@@ -4,7 +4,7 @@
 set -euo pipefail
 
 readonly OMARCHY_DIR="$HOME/.config/omarchy"
-readonly THEME_NAME_FILE="$OMARCHY_DIR/current/theme.name"
+readonly THEME_NAME_FILE="$HOME/.local/state/omarchy/current/theme.name"
 readonly PERSISTENT_THEMES_DIR="$HOME/.config/tmux/omarchy-themes"
 readonly CURRENT_THEME_LINK="$HOME/.config/tmux/omarchy-current-theme.conf"
 
