@@ -33,6 +33,9 @@ bindd = SUPER SHIFT ALT, K, Show key bindings, exec, omarchy-menu-keybindings
 unbind = SUPER, J
 bindd = SUPER SHIFT, S, "Toggle Split", layoutmsg, togglesplit
 
+# Unbind the toggle workspace 
+unbind = Super, L
+
 bindd = SUPER, H, Move focus left, movefocus, l
 bindd = SUPER, L, Move focus right, movefocus, r
 bindd = SUPER, K, Move focus up, movefocus, u
